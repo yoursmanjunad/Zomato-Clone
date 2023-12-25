@@ -62,9 +62,13 @@ pipeline{
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image mudit097/zomato:latest > trivy.txt" 
+                sh "trivy image manju2033/zomato:latest > trivy.txt" 
             }
         }
-    
+    stage('Deploy to container'){
+     steps{
+            sh 'docker run -d --name zomato -p 80:3000 manju2033/zomato:latest'
+          }
+      }
   }
 }
